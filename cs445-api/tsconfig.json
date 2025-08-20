@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    /* File Layout */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* Environment Settings */
+    "module": "CommonJS",          // Hợp với Node.js
+    "target": "ES2020",            // Hợp lý cho backend
+    "lib": ["ES2020"],             // Dùng lib của ES2020
+    "types": ["node"],             // Hỗ trợ Node.js types
+
+    /* Output */
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    /* Strict checks */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    /* Module resolution */
+    "esModuleInterop": true,        // Giúp import express, mongoose chạy đúng
+    "moduleResolution": "node",     // Cần cho Node.js
+    "resolveJsonModule": true,      // Nếu muốn import file JSON
+
+    /* Misc */
+    "skipLibCheck": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
