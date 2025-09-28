@@ -25,7 +25,7 @@ const UserSchema = new Schema<IUserModelDoc>(
     status: {
       type: String,
       enum: ["enable", "blocked", "pending"],
-      default: "pending",
+      default: "enable",
     },
   },
   {

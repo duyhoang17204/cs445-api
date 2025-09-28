@@ -10,9 +10,10 @@ export interface IDoc {
 }
 
 export interface IProductDoc extends IDoc {
-  name: string;
-  image: string;
-  price: string;
+  name?: string;
+  image?: string;
+  price?: string;
+  status?: string;
 }
 export interface IUserDoc extends IDoc {
   email: string;
@@ -22,4 +23,9 @@ export interface IUserDoc extends IDoc {
   status: string;
   avatar: string;
   full_name: string;
+}
+
+export interface ICategories extends IDoc {
+  name: string;
+  key: string;
 }

@@ -1,11 +1,22 @@
 import { Response } from "express";
-import RegisterService from "./auth.service";
+import AuthService from "./auth.service";
 import { requestError, requestSuccess } from "../../utils/responses";
 
 const register = (req: any, res: Response) => {
-  RegisterService.register(req.body)
+  AuthService.register(req.body)
     .then(requestSuccess(res))
     .catch(requestError(res));
 };
 
-export default { register };
+const loginByUser = (req: any, res: Response) => {
+  AuthService.loginByUser(req.body)
+    .then(requestSuccess(res))
+    .catch(requestError(res));
+};
+const verifyLogin = (req: any, res: Response) => {
+  AuthService.verifyLogin(req.body)
+    .then(requestSuccess(res))
+    .catch(requestError(res));
+};
+
+export default { register, loginByUser, verifyLogin };

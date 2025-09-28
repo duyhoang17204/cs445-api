@@ -1,30 +1,23 @@
 import mongoose from "mongoose";
+import { ICategories } from "../../types/entityTypes";
 import paginate from "mongoose-paginate-v2";
-import { IProductDoc } from "../../types/entityTypes";
-import { TABLE_PRODUCT } from "../../config/table";
+import { TABLE_CATEGORY } from "../../config/table";
 
-export interface IProductDocModel extends IProductDoc, mongoose.Document {}
+export interface ICategoryDocModel extends ICategories, mongoose.Document {}
 
-interface IProductModel extends mongoose.Model<IProductDocModel> {
+interface IProductModel extends mongoose.Model<ICategoryDocModel> {
   paginate: any;
 }
 
-const _Schema = new mongoose.Schema<IProductDocModel>(
+const _Schema = new mongoose.Schema<ICategoryDocModel>(
   {
     name: {
       type: String,
       required: true,
     },
-    image: {
+    key: {
       type: String,
-    },
-    price: {
-      type: String,
-    },
-    status: {
-      type: String,
-      enum: ["enable", "blocked", "pending"],
-      default: "enable",
+      required: true,
     },
 
     createdById: {
@@ -48,9 +41,9 @@ const _Schema = new mongoose.Schema<IProductDocModel>(
 
 _Schema.plugin(paginate);
 
-const ProductModel = mongoose.model<IProductDocModel, IProductModel>(
-  TABLE_PRODUCT,
+const CategoryModel = mongoose.model<ICategoryDocModel, IProductModel>(
+  TABLE_CATEGORY,
   _Schema
 );
 
-export default ProductModel;
+export default CategoryModel;
