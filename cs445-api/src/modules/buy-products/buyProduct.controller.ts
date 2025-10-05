@@ -1,19 +1,19 @@
 import { Response } from "express";
 
 import { requestError, requestSuccess } from "../../utils/responses";
-import ProductService from "./products.service";
+import BuyProductService from "./buyProduct.service";
 
 const create = (req: any, res: Response) => {
-  ProductService.create(req.body)
+  BuyProductService.create(req.body)
     .then(requestSuccess(res))
     .catch(requestError(res));
 };
 const getAll = (req: any, res: Response) => {
-  ProductService.getAll().then(requestSuccess(res)).catch(requestError(res));
+  BuyProductService.getAll().then(requestSuccess(res)).catch(requestError(res));
 };
-const ProductController = {
+const BuyProductController = {
   create,
   getAll,
 };
 
-export default ProductController;
+export default BuyProductController;

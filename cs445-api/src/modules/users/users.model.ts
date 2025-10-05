@@ -27,9 +27,22 @@ const UserSchema = new Schema<IUserModelDoc>(
       enum: ["enable", "blocked", "pending"],
       default: "enable",
     },
+    createdById: {
+      type: mongoose.Schema.Types.ObjectId,
+    },
+    updatedById: {
+      type: mongoose.Schema.Types.ObjectId,
+    },
+    deletedAt: { type: Date, required: false },
+    deletedById: {
+      type: mongoose.Schema.Types.ObjectId,
+    },
   },
   {
-    timestamps: true,
+    timestamps: {
+      createdAt: "createdAt",
+      updatedAt: "updatedAt",
+    },
   }
 );
 

@@ -7,7 +7,19 @@ const create = (req: Request, res: Response) => {
     .then(requestSuccess(res))
     .catch(requestError(res));
 };
-
-export default {
-  create,
+const getAll = (req: Request, res: Response) => {
+  UserService.getAll().then(requestSuccess(res)).catch(requestError(res));
 };
+const deleted = (req: Request, res: Response) => {
+  UserService.deleted(req.params.id)
+    .then(requestSuccess(res))
+    .catch(requestError(res));
+};
+
+const UserController = {
+  create,
+  getAll,
+  deleted,
+};
+
+export default UserController;

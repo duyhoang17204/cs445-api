@@ -1,9 +1,9 @@
-import ProductModel from "./products.model";
+import BuyProductModel from "./buyProducts.model";
 
 const create = (body: any) =>
   new Promise(async (rs, rj) => {
     try {
-      const product = await ProductModel.create({ ...body });
+      const product = await BuyProductModel.create({ ...body });
       rs(product);
     } catch (error) {
       rj(error);
@@ -13,15 +13,15 @@ const create = (body: any) =>
 const getAll = () =>
   new Promise(async (rs, rj) => {
     try {
-      const products = await ProductModel.find();
+      const products = await BuyProductModel.find();
       rs(products);
     } catch (error) {
       rj(error);
     }
   });
 
-const ProductService = {
+const BuyProductService = {
   create,
   getAll,
 };
-export default ProductService;
+export default BuyProductService;

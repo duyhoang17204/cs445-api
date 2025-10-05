@@ -14,6 +14,7 @@ export interface IProductDoc extends IDoc {
   image?: string;
   price?: string;
   status?: string;
+  category_id?: string;
 }
 export interface IUserDoc extends IDoc {
   email: string;
@@ -23,6 +24,12 @@ export interface IUserDoc extends IDoc {
   status: string;
   avatar: string;
   full_name: string;
+}
+
+export interface IBuyProduct extends IDoc {
+  user_id: string;
+  name_product: string;
+  id_product: string;
 }
 
 export interface ICategories extends IDoc {

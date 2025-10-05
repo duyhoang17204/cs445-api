@@ -14,6 +14,30 @@ const create = (body: any): any =>
     }
   });
 
+const getAll = () =>
+  new Promise(async (rs, rj) => {
+    try {
+      const users = await UserModel.find();
+      rs(users);
+    } catch (error) {
+      rj(error);
+    }
+  });
+
+const deleted = (id: any) =>
+  new Promise(async (rs, rj) => {
+    try {
+      await UserModel.deleteOne({
+        _id: id,
+      });
+      rs("Deleted Success");
+    } catch (error) {
+      rj(error);
+    }
+  });
+
 export default {
   create,
+  getAll,
+  deleted,
 };

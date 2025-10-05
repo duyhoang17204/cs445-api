@@ -19,9 +19,21 @@ const getAll = () =>
       rj(error);
     }
   });
+const deleted = (id: any) =>
+  new Promise(async (rs, rj) => {
+    try {
+      await CategoryModel.deleteOne({
+        _id: id,
+      });
+      rs("Deleted Success");
+    } catch (error) {
+      rj(error);
+    }
+  });
 
 const CategoryService = {
   create,
   getAll,
+  deleted,
 };
 export default CategoryService;
