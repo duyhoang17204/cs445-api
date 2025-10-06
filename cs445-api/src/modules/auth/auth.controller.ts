@@ -19,4 +19,22 @@ const verifyLogin = (req: any, res: Response) => {
     .catch(requestError(res));
 };
 
-export default { register, loginByUser, verifyLogin };
+const forgotPassword = (req: any, res: Response) => {
+  AuthService.forgotPassword(req.body)
+    .then(requestSuccess(res))
+    .catch(requestError(res));
+};
+
+const resetPasswordSimple = (req: any, res: Response) => {
+  AuthService.resetPasswordSimple(req.body)
+    .then(requestSuccess(res))
+    .catch(requestError(res));
+};
+
+export default {
+  register,
+  loginByUser,
+  verifyLogin,
+  resetPasswordSimple,
+  forgotPassword,
+};

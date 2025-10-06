@@ -1,6 +1,8 @@
 import { jwtToken, pareJwtToken } from "../../utils/jwt";
 import UserModel from "../users/users.model";
 import UsersService from "../users/users.service";
+import bcrypt from "bcryptjs";
+import nodemailer from "nodemailer";
 
 const register = async (body: any) => {
   try {
@@ -87,8 +89,60 @@ const verifyLogin = (body: any) =>
     }
   });
 
+const forgotPassword = async (body: any) => {
+  const { email } = body;
+  const user = await UserModel.findOne({ email });
+  if (!user) throw new Error("Không tìm thấy người dùng!");
+
+  const resetToken = jwtToken({ email }, { expiresIn: 600 }); // 10 phút
+
+  const resetLink = `https://your-frontend-domain.com/reset-password?token=${resetToken}`;
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS,
+    },
+  });
+
+  await transporter.sendMail({
+    from: `"Support Team" <${process.env.MAIL_USER}>`,
+    to: email,
+    subject: "Đặt lại mật khẩu của bạn",
+    html: `
+      <h3>Xin chào!</h3>
+      <p>Bạn vừa yêu cầu đặt lại mật khẩu.</p>
+      <p>Nhấn vào liên kết bên dưới để đổi mật khẩu (hết hạn sau 10 phút):</p>
+      <a href="${resetLink}" target="_blank">${resetLink}</a>
+      <br/><br/>
+      <p>Nếu bạn không yêu cầu, vui lòng bỏ qua email này.</p>
+    `,
+  });
+
+  return "Email đặt lại mật khẩu đã được gửi!";
+};
+
+const resetPasswordSimple = async (body: any) => {
+  const { token, newPassword } = body;
+  if (!token || !newPassword) throw new Error("Thiếu token hoặc mật khẩu mới!");
+
+  const decoded: any = pareJwtToken(token);
+  if (!decoded?.email) throw new Error("Token không hợp lệ hoặc đã hết hạn!");
+
+  const user = await UserModel.findOne({ email: decoded.email });
+  if (!user) throw new Error("Không tìm thấy người dùng!");
+
+  user.password = bcrypt.hashSync(newPassword, 10);
+  await user.save();
+
+  return "Đổi mật khẩu thành công!";
+};
+
 export default {
   register,
   loginByUser,
   verifyLogin,
+  resetPasswordSimple,
+  forgotPassword,
 };
