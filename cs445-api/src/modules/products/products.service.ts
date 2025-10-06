@@ -42,9 +42,20 @@ const update = (id: string, body: any) =>
     }
   });
 
+const getProductById = (id: string) =>
+  new Promise(async (rs, rj) => {
+    try {
+      const product = await ProductModel.findById({ _id: id });
+      rs(product);
+    } catch (error) {
+      rj(error);
+    }
+  });
+
 const ProductService = {
   create,
   getAll,
   update,
+  getProductById,
 };
 export default ProductService;

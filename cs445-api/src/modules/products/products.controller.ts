@@ -21,9 +21,16 @@ const update = (req: any, res: Response) => {
     .catch(requestError(res));
 };
 
+const getProductById = (req: any, res: Response) => {
+  const { id } = req.params;
+  ProductService.getProductById(id)
+    .then(requestSuccess(res))
+    .catch(requestError(res));
+};
 const ProductController = {
   create,
   getAll,
+  getProductById,
   update,
 };
 
