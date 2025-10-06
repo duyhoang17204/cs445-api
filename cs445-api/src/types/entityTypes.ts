@@ -30,6 +30,7 @@ export interface IBuyProduct extends IDoc {
   user_id: string;
   name_product: string;
   id_product: string;
+  price: string;
 }
 
 export interface ICategories extends IDoc {

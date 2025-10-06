@@ -13,7 +13,6 @@ const _Schema = new mongoose.Schema<IBuyProductDocModel>(
   {
     name_product: {
       type: String,
-      required: true,
     },
 
     user_id: {
@@ -22,6 +21,7 @@ const _Schema = new mongoose.Schema<IBuyProductDocModel>(
     id_product: {
       type: String,
     },
+    price: { type: String },
 
     createdById: {
       type: mongoose.Schema.Types.ObjectId,
