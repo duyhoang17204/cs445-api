@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import paginate from "mongoose-paginate-v2";
-import { IBuyProduct, IProductDoc } from "../../types/entityTypes";
-import { TABLE_PRODUCT } from "../../config/table";
+import { IBuyProduct } from "../../types/entityTypes";
+import { TABLE_BUY_PRODUCT, TABLE_PRODUCT } from "../../config/table";
 
 export interface IBuyProductDocModel extends IBuyProduct, mongoose.Document {}
 
@@ -45,7 +45,7 @@ const _Schema = new mongoose.Schema<IBuyProductDocModel>(
 _Schema.plugin(paginate);
 
 const BuyProductModel = mongoose.model<IBuyProductDocModel, IBuyProductModel>(
-  TABLE_PRODUCT,
+  TABLE_BUY_PRODUCT,
   _Schema
 );
 
