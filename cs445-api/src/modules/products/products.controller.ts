@@ -9,7 +9,9 @@ const create = (req: any, res: Response) => {
     .catch(requestError(res));
 };
 const getAll = (req: any, res: Response) => {
-  ProductService.getAll().then(requestSuccess(res)).catch(requestError(res));
+  ProductService.getAll(req.query)
+    .then(requestSuccess(res))
+    .catch(requestError(res));
 };
 const ProductController = {
   create,

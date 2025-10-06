@@ -10,10 +10,14 @@ const create = (body: any) =>
     }
   });
 
-const getAll = () =>
+const getAll = (query: any) =>
   new Promise(async (rs, rj) => {
     try {
-      const products = await ProductModel.find();
+      const { category_id } = query;
+      const filter = {
+        ...(category_id ? { category_id } : {}),
+      };
+      const products = await ProductModel.find(filter);
       rs(products);
     } catch (error) {
       rj(error);
