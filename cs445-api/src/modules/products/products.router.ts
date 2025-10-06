@@ -4,5 +4,6 @@ const router = express.Router();
 
 router.post("/create", ProductController.create);
 router.get("/", ProductController.getAll);
+router.put("/:id", ProductController.update);
 
 export default router;

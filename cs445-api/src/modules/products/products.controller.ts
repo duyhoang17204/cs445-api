@@ -13,9 +13,18 @@ const getAll = (req: any, res: Response) => {
     .then(requestSuccess(res))
     .catch(requestError(res));
 };
+const update = (req: any, res: Response) => {
+  const { id } = req.params;
+
+  ProductService.update(id, req.body)
+    .then(requestSuccess(res))
+    .catch(requestError(res));
+};
+
 const ProductController = {
   create,
   getAll,
+  update,
 };
 
 export default ProductController;

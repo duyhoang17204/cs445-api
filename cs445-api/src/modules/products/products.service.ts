@@ -23,9 +23,28 @@ const getAll = (query: any) =>
       rj(error);
     }
   });
+const update = (id: string, body: any) =>
+  new Promise(async (rs, rj) => {
+    try {
+      const updatedProduct = await ProductModel.findByIdAndUpdate(
+        id,
+        { ...body },
+        { new: true }
+      );
+
+      if (!updatedProduct) {
+        return rj(new Error("Product not found"));
+      }
+
+      rs(updatedProduct);
+    } catch (error) {
+      rj(error);
+    }
+  });
 
 const ProductService = {
   create,
   getAll,
+  update,
 };
 export default ProductService;

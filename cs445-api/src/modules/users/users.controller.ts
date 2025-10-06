@@ -16,10 +16,18 @@ const deleted = (req: Request, res: Response) => {
     .catch(requestError(res));
 };
 
+const update = (req: Request, res: Response) => {
+  const { id } = req.params;
+  UserService.update(id, req.body)
+    .then(requestSuccess(res))
+    .catch(requestError(res));
+};
+
 const UserController = {
   create,
   getAll,
   deleted,
+  update,
 };
 
 export default UserController;

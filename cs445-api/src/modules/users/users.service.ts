@@ -36,8 +36,28 @@ const deleted = (id: any) =>
     }
   });
 
+const update = (id: any, body: any) =>
+  new Promise(async (rs, rj) => {
+    try {
+      if (body.password) {
+        body.password = bcrypt.hashSync(body.password, 10);
+      }
+
+      const updatedUser = await UserModel.findByIdAndUpdate(id, body, {});
+
+      if (!updatedUser) {
+        return rj(new Error("User not found"));
+      }
+
+      rs(updatedUser);
+    } catch (error) {
+      rj(error);
+    }
+  });
+
 export default {
   create,
   getAll,
   deleted,
+  update,
 };

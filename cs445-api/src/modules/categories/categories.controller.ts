@@ -18,10 +18,19 @@ const deleted = (req: any, res: Response) => {
     .then(requestSuccess(res))
     .catch(requestError(res));
 };
+
+const update = (req: any, res: Response) => {
+  const { id } = req.params;
+  CategoryService.update(id, req.body)
+    .then(requestSuccess(res))
+    .catch(requestError(res));
+};
+
 const CategoryController = {
   create,
   getAll,
   deleted,
+  update,
 };
 
 export default CategoryController;

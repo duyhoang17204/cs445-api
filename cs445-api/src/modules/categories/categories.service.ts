@@ -31,9 +31,25 @@ const deleted = (id: any) =>
     }
   });
 
+const update = (id: any, body: any) =>
+  new Promise(async (rs, rj) => {
+    try {
+      const updatedCategory = await CategoryModel.findByIdAndUpdate(
+        id,
+        { ...body },
+        { new: true }
+      );
+      if (!updatedCategory) throw new Error("Category not found");
+      rs(updatedCategory);
+    } catch (error) {
+      rj(error);
+    }
+  });
+
 const CategoryService = {
   create,
   getAll,
   deleted,
+  update,
 };
 export default CategoryService;
